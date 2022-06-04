@@ -1,0 +1,18 @@
+:city "Maribor" {
+	:road "Ljubljanska" {
+		bend((1, 1), (2, 2), 20);
+		bend((2, 2), (3, 1), 40);
+		line((2, 2), (2, 5));
+		bend((2, 3), (5, 4), 20);
+		line((5, 4), (6, 4));
+	};
+	:building "Mercator" {
+		box((3, 2), (5, 3));
+	};
+	:building "Trafika" {
+		box((0.5, 3.5), (1.5, 2.5));
+	};
+	:building "Blok" {
+		box((0.5, 5), (1.5, 4));
+	};
+};

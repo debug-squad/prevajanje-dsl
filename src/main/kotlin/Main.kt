@@ -15,5 +15,7 @@ fun printTokens(scanner: Scanner) {
 
 fun main(args: Array<String>) {
     val scanner = Scanner(EvalAutomaton, FileInputStream(File(args[0])))
+    val parser = Parser(scanner)
+    println("${if(parser.parse()) { "accept" } else { "reject" }}")
     printTokens(scanner)
 }
