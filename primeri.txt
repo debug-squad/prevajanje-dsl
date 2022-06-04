@@ -1,0 +1,184 @@
+//
+// 1.
+//
+
+:city "Maribor" {
+	:road "Ljubljanska" {
+		bend((1, 1), (2, 2), 20);
+		bend((2, 2), (3, 1), 40);
+		line((2, 2), (2, 5));
+		bend((2, 3), (5, 4), 20);
+		line((5, 4), (6, 4));
+	};
+	:building "Mercator" {
+		box((3, 2), (5, 3));
+	};
+	:building "Trafika" {
+		box((0.5, 3.5), (1.5, 2.5));
+	};
+	:building "Blok" {
+		box((0.5, 5), (1.5, 4));
+	};
+};
+
+//
+// 2.
+//
+
+:city "Maribor" {
+	:building "Europark" {
+		for i in range(0, 10, 2) {
+			box((i, i), (i+1, i+1));
+			box((i/2, i/2), (i/2+1, i/2+1));
+		};
+	};
+	:roundabout = (0, 10);
+	:river "drava" {
+		-- (0, 0) -- (50, 20) -- (10, 10) bend(20) -- (6, 5);
+	};
+};
+
+//
+// 3.
+//
+
+:city "Maribor" {
+	:park "magdalenski park" {
+ 		circle((20, 20), 20);
+	};
+	:shop "trafika 3dva " = (20, 40);
+	:bar "XO" = (40, 40);
+	:junction = (0, 0);
+};
+
+//
+// 4.
+//
+
+:city "Maribor" {
+	fn Naselje(st_zgradb, ime_naselja) {
+		for i in range(0, st_zgradb, 2) {
+			:building (ime_naselja + i) {
+				box((i, i), (i+1, i+1));
+				box((i/2, i/2), (i/2+1, i/2+1))
+			};
+		};
+	};
+	Naselje(5, "Gosposvetska");
+};
+
+//
+// 5.
+//
+
+
+:city "Maribor" {
+    fn test(arg1, arg2) = arg1 + arg2;
+    :building "Mari:box " {
+        for i in range(0, 10, 2) {
+            box((i, i), (i+1, i+1));
+            box((i/2, i/2), (i/2+1, i/2+1));
+        };
+    };
+	:tree = (0, test(10, 20));
+	:river "drava" {
+		-- (0, 0) -- (50, 20) -- (10, 10) bend(20) -- (6, 5);
+	};
+	:park "Magdalenski " {
+			circle((20, 20), 20);
+	};
+	:roundabout = (0, 10);
+	:junction = (0, 0);
+	:restaraunt "Mc Donald" = (50, 10);
+	:shop "Big Bang" = (20, 40);
+	:cinema "Cinemaplex" = (20, 20);
+	:bar "Akoya" = (40, 40);
+};
+
+//
+// 6.
+//
+
+:city "Maribor" {
+	fn postavi_drevesa(st_dreves, zacetek) {
+		for i in range(zacetek, st_dreves+zacetek, 1) {
+			:tree = (zacetek, i);
+		};
+	};
+	:river "ime" {
+		-- (0, 0) -- (50, 20) -- (10, 10) bend(20) -- (6, 5);
+	};
+	postavi_drevesa(10, 1);
+};
+
+//
+// 7.
+//
+
+:city "Maribor" {
+	:park "levi_park" {
+ 		circle((20, 20), 20);
+	};
+	:river "potok" {
+		-- (0, 0) -- (50, 30) -- (10, 10) bend (20) -- (6, 5);
+	};
+	:park "desni_park" {
+ 		circle((20, 20), 20);
+	};
+};
+
+//
+// 8.
+//
+
+:city "Maribor" {
+	:road "prva" {
+		line((0,0), (0,3));
+	};
+	:junction = (0,3);
+	:road "druga" {
+			line((0,3), (3,4));
+	};
+	:road "tretja" {
+		line((0,3), (0,5));
+		bend ((0, 5), (1, 5), 90);
+	};
+}
+
+//
+// 9.
+//
+
+:city "Maribor" {
+	:park "glavni _park" {
+		box((1,2),(1,4));
+	};
+	:road "cesta_okrog_parka" {
+		line((0,1), (0,4));
+		bend ((0, 4), (1, 4), 90);
+		line((1,4), (4,4));
+		bend ((4, 4), (3, 4), 90);
+		line((3,4), (0,4));
+		bend ((0,4), (4, 1), 90);
+		line((4,1), (6,0));
+	};
+	:junction = (7,0);
+}
+
+//
+// 10.
+//
+
+fn test2(a, b) {
+	line(a, b)
+};
+:city "test" {
+	let test = fn(a, b) = a+b;
+	:drevo = (1, test(2, 4));
+	:river "Drava" {
+		test2((1, 2), (3, 2));
+	};
+	:river "Drava2" {
+		-- (3, 3) -- (4, 4);
+	};
+};
