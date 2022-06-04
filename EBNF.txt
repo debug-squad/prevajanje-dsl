@@ -1,0 +1,46 @@
+ENTRY ::= STATEMENTS EOF;
+
+STATEMENTS ::= [ STATEMENT { semi STATEMENT } ];
+STATEMENT ::= colon variable [ EXPRESION ] LAMBDA_BODY
+    | fn variable lparen [ variable { comma variable } ] rparen LAMBDA_BODY
+    | lbr STATEMENTS rbr
+    | if EXPRESION lbr STATEMENTS rbr [ else lbr STATEMENTS rbr ]
+    | for variable in EXPRESION lbr STATEMENTS rbr
+    | let variable [ assign EXPRESION ]
+    | variable ( assign EXPRESION | lparen [ EXPRESION { comma EXPRESION } ] rparen )
+    | return [ EXPRESION ]
+    | continue 
+    | break 
+    | line EXPRESION { line EXPRESION [ variable lparen [ EXPRESION { comma EXPRESION } ] rparen ] }
+    | ;
+
+(* Expression *)
+EXPRESION ::= EXPR_08;
+
+EXPR_08 ::= EXPR_07 { or EXPR_07 };
+EXPR_07 ::= EXPR_06 { and EXPR_06 };
+EXPR_06 ::= EXPR_05 [ eq EXPR_05 | noteq EXPR_05 ];
+EXPR_05 ::= EXPR_04 [ more EXPR_04 | moreeq EXPR_04 | less EXPR_04 | lesseq EXPR_04 ];
+EXPR_04 ::= EXPR_03 { plus EXPR_03 | minus EXPR_03 };
+EXPR_03 ::= EXPR_02 { times EXPR_02 | divide EXPR_02 | mod EXPR_02 };
+EXPR_02 ::= EXPR_01 { pow EXPR_01 };
+EXPR_01 ::= plus EXPR_00
+    | minus EXPR_00
+    | not EXPR_00
+    | EXPR_00
+    ;
+EXPR_00 ::= variable [ lparen [ EXPRESION { comma EXPRESION } ] rparen ]
+    | lparen EXPRESION [ comma EXPRESION ] rparen
+    | null
+    | float
+    | str0
+    | str1
+    | str2
+    | true
+    | false
+    | fn lparen [ variable { comma variable } ] rparen LAMBDA_BODY
+    | lsqbr [ EXPRESION { comma EXPRESION } ] rsqbr
+    ;
+LAMBDA_BODY ::= lbr STATEMENTS rbr
+    | assign EXPRESION
+    ;
